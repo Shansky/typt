@@ -1,0 +1,7 @@
+---
+# playbooks/vienna.yml
+
+- name: Install packages on servers
+  hosts: my_group
+  roles:
+    - common

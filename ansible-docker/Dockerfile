@@ -1,0 +1,22 @@
+FROM debian:11
+
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip install pip --upgrade
+RUN pip install ansible molecule ansible-lint
+
+RUN mkdir /run/sshd
+RUN apt-get update -y && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    sshpass openssh-client iputils-ping openssh-server sudo
+
+COPY id_ed25519.pub /root/.ssh/authorized_keys
+COPY id_ed25519 /root/.ssh/id_ed25519
+
+WORKDIR /work
+
+ENV TERM xterm
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D", "-4"]

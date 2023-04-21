@@ -1,0 +1,12 @@
+[all]
+localhost
+server1
+server2
+server3
+server4
+
+[my_group]
+server1
+server2
+server3
+server4

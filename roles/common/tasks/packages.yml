@@ -1,0 +1,23 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Check and install packages
+  block:
+    - name: Check if the package is installed
+      ansible.builtin.package_facts:
+        manager: auto
+      register: package_check_result
+    - name: Verify package existence
+      assert:
+        that:
+          - "'{{item}}' in package_check_result.ansible_facts.packages"
+        fail_msg: "The package '{{ item }}' is not installed on {{ inventory_hostname }}"
+      failed_when: "'{{item}}' not in package_check_result.ansible_facts.packages"
+      with_items: "{{ packages }}"
+      ignore_errors: False
+    - name: Install packages
+      apt:
+        name: "{{item}}"
+        state: present
+      with_items: "{{ packages }}"

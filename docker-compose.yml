@@ -1,0 +1,29 @@
+services:
+  ansible:
+    image: local_ansible:latest
+    build:
+      context: ansible-docker
+      dockerfile: Dockerfile
+    container_name: ansible_instance
+    volumes:
+      - .:/work
+  server1:
+    build:
+      context: ansible-docker
+      dockerfile: Dockerfile.package
+    container_name: server1
+  server2:
+    build:
+      context: ansible-docker
+      dockerfile: Dockerfile.package
+    container_name: server2
+  server3:
+    build:
+      context: ansible-docker
+      dockerfile: Dockerfile.nopackage
+    container_name: server3
+  server4:
+    build:
+      context: ansible-docker
+      dockerfile: Dockerfile.nopackage
+    container_name: server4

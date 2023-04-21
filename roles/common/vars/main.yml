@@ -1,0 +1,16 @@
+---
+
+packages:
+  - 'my-package-1'
+  - 'my-package-2'
+  # - apt-transport-https
+  # - colordiff
+  # - git-core
+  # - htop
+  # - mtr-tiny
+  # - nano
+  # - psmisc
+  # - rsync
+  # - strace
+  # - sysstat
+  # - vim
